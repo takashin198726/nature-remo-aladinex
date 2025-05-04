@@ -1,0 +1,38 @@
+{
+    "bridge": {
+      "name": "Homebridge",
+      "username": "__HOMEBRIDGE_USERNAME__",
+      "port": 51826,
+      "pin": "__HOMEBRIDGE_PIN__"
+    },
+    "accessories": [
+      {
+        "accessory": "NatureRemo",
+        "name": "プロジェクター",
+        "type": "ExternalControl",
+        "on": { "data": "__PROJECTOR_ON_IR__", "format": "us", "freq": 38 },
+        "off": { "data": "__PROJECTOR_OFF_IR__", "format": "us", "freq": 38 }
+      },
+      {
+        "accessory": "NatureRemo",
+        "name": "リビング照明",
+        "type": "ExternalControl",
+        "on": { "data": "__LIVING_LIGHT_ON_IR__", "format": "us", "freq": 38 },
+        "off": { "data": "__LIVING_LIGHT_OFF_IR__", "format": "us", "freq": 38 }
+      },
+      {
+        "accessory": "NatureRemo",
+        "name": "常夜灯",
+        "type": "ExternalControl",
+        "on": { "data": "__NIGHT_LIGHT_ON_IR__", "format": "us", "freq": 38 },
+        "off": { "data": "__NIGHT_LIGHT_OFF_IR__", "format": "us", "freq": 38 }
+      }
+    ],
+    "platforms": [
+      {
+        "platform": "NatureRemo",
+        "name": "NatureRemo",
+        "token": "__NATURE_REMO_TOKEN__"
+      }
+    ]
+  }

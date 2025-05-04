@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  homebridge:
+    image: oznu/homebridge:latest # または homebridge/homebridge:latest
+    container_name: homebridge_nature_remo
+    restart: always
+    network_mode: host
+    environment:
+      # TZは.envファイルから読み込むようにする (entrypoint.sh内でexportされる)
+      # TZ: Asia/Tokyo # ここで設定しても良いが .env で一元管理
+      # 他に必要な環境変数があればここに追加可能
+      # EXAMPLE_VAR: example_value
+      # Dockerコンテナ内のタイムゾーンも設定 (entrypoint.shでも設定可能)
+      TZ: ${TZ:-Asia/Tokyo}
+    volumes:
+      # ローカル(ホスト)の ./homebridge を コンテナ内の /homebridge にマウント
+      - ./homebridge:/homebridge
+      # ローカルの .env ファイルを コンテナ内の /app/.env に読み取り専用でマウント
+      - ./.env:/app/.env:ro
+      # ローカルの entrypoint.sh を コンテナ内の /entrypoint.sh に読み取り専用でマウント
+      - ./entrypoint.sh:/entrypoint.sh:ro
+    # コンテナ起動時に実行するコマンドを指定
+    entrypoint: /entrypoint.sh
+    # パーミッション問題が発生した場合の試行 (通常は不要)
+    # user: "1000:1000" # ホストユーザーのUID/GIDに合わせる
